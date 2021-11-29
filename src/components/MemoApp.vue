@@ -48,6 +48,7 @@ export default {
           }
       )
       data.content =  ''
+      data.closeTextArea = true
     }
     const edit = () => {
       data.store.commit('editMemo',
