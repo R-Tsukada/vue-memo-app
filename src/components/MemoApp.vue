@@ -1,21 +1,19 @@
 <template>
   <div class="memo-app">
-    <h1>MemoApp</h1>
-    <p v-if="data.closeTextArea" @click="openTextArea">+</p>
+    <h1 class="bg-secondary text-white display-4 px-3 text-center">MemoApp</h1>
+    <p class="font-weight-bold" v-if="data.closeTextArea" @click="openTextArea">+</p>
     <div v-else @dblclick="initializeTextArea">
-      <textarea name='content' v-model="data.content"></textarea>
-      <button @click="addMemo">SAVE</button>
+      <textarea class="form-control w-50 mx-auto" name='content' v-model="data.content"></textarea>
+      <button class="btn btn-info m-2" @click="addMemo">SAVE</button>
     </div>
-    <!--    デバッグ用-->
-    <p>{{$store.state.memos}}</p>
-    <ul>
+    <ul class="list-group">
       <div v-if="data.closeEditTextArea" @click="openEditTextArea">
-        <li  v-for="memo in memos" v-bind:key="memo.id" @click="selectedMemo(memo)">{{ memo.content.split('\n')[0] }}</li>
+        <li class="list-group-item list-group-item-action w-25 mx-auto" v-for="memo in memos" v-bind:key="memo.id" @click="selectedMemo(memo)">{{ memo.content.split('\n')[0] }}</li>
       </div>
       <div v-else>
-        <textarea name="edit_content" v-model="data.content"  @dblclick="initializeTextArea"></textarea>
-        <button @click="editMemo(data)">EDIT</button>
-        <button @click="deleteMemo(data)">DELETE</button>
+        <textarea class="form-control w-50 mx-auto" name="edit_content" v-model="data.content"  @dblclick="initializeTextArea"></textarea>
+        <button class="btn btn-info m-2" @click="editMemo(data)">EDIT</button>
+        <button class="btn btn-info m-2" @click="deleteMemo(data)">DELETE</button>
       </div>
     </ul>
   </div>
