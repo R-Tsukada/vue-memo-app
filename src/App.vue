@@ -1,5 +1,5 @@
 <template>
-  <HelloWorld />
+  <MemoApp />
 </template>
 
 <script>

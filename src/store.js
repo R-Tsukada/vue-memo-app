@@ -7,6 +7,15 @@ export const store = createStore({
       memos:[]
     }
   },
+  mutations: {
+    addMemo: (state, object) => {
+      console.log('addMemo')
+      state.memos.unshift({
+        id: state.memos.length + 1,
+        content: object.content
+      })
+    }
+  },
   plugins: [
     createPersistedState(),
   ]
