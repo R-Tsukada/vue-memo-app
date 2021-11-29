@@ -5,6 +5,9 @@
     <button @click="addMemo">SAVE</button>
     <!--    デバッグ用-->
     <p>{{$store.state.memos}}</p>
+    <ul>
+      <li v-for="memo in memos" v-bind:key="memo.id">{{ memo.content.split('\n')[0]}}</li>
+    </ul>
   </div>
 </template>
 
