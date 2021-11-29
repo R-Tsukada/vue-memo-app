@@ -1,8 +1,11 @@
 <template>
   <div class="memo-app">
     <h1>MemoApp</h1>
-    <textarea name='content' v-model="data.content"></textarea>
-    <button @click="addMemo">SAVE</button>
+    <p v-if="data.closeTextArea" @click="openTextArea">+</p>
+    <div v-else @dblclick="initializeTextArea">
+      <textarea name='content' v-model="data.content"></textarea>
+      <button @click="addMemo">SAVE</button>
+    </div>
     <!--    デバッグ用-->
     <p>{{$store.state.memos}}</p>
     <ul>
@@ -24,19 +27,30 @@ export default {
   setup() {
     const data = reactive({
       content: '',
-      store: useStore()
+      store: useStore(),
+      closeTextArea: true
     })
     const insert = () => {
+      console.log('insert')
       data.store.commit('addMemo',
           {
             id: '',
             content: data.content
           }
       )
+      data.content = ''
+    }
+    const openTextArea = () => {
+      data.closeTextArea = false
+    }
+    const initializeTextArea = () => {
+      data.closeTextArea = true
     }
     return {
       data,
       addMemo: insert,
+      openTextArea,
+      initializeTextArea,
     }
   }
 }
