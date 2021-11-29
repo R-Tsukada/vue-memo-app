@@ -86,6 +86,8 @@ export default {
         console.log('error')
       }
       data.closeEditTextArea = true
+      data.id = ''
+      data.content = ''
     }
     return {
       data,
