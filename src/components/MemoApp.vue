@@ -9,7 +9,13 @@
     <!--    デバッグ用-->
     <p>{{$store.state.memos}}</p>
     <ul>
-      <li v-for="memo in memos" v-bind:key="memo.id" @click="selectedMemo(memo)">{{ memo.content.split('\n')[0]}}</li>
+      <div v-if="data.closeEditTextArea" @click="openEditTextArea">
+        <li  v-for="memo in memos" v-bind:key="memo.id" @click="selectedMemo(memo)">{{ memo.content.split('\n')[0] }}</li>
+      </div>
+      <div v-else>
+        <textarea name="edit_content" v-model="data.content"  @dblclick="initializeTextArea"></textarea>
+        <button @click="editMemo(data)">EDIT</button>
+      </div>
     </ul>
   </div>
 </template>
@@ -28,7 +34,8 @@ export default {
     const data = reactive({
       content: '',
       store: useStore(),
-      closeTextArea: true
+      closeTextArea: true,
+      closeEditTextArea: true,
     })
     const insert = () => {
       console.log('insert')
@@ -40,11 +47,26 @@ export default {
       )
       data.content =  ''
     }
+    const edit = () => {
+      console.log(data.content)
+      data.store.commit('editMemo',
+          {
+            content: data.content
+          }
+      )
+      data.content = ''
+      data.closeEditTextArea = true
+    }
     const openTextArea = () => {
       data.closeTextArea = false
     }
+    const openEditTextArea = () => {
+      data.closeEditTextArea = false
+      data.closeTextArea = true
+    }
     const initializeTextArea = () => {
       data.closeTextArea = true
+      data.closeEditTextArea = true
       data.content = ''
     }
     const selectedMemo = (memo) => {
@@ -55,8 +77,10 @@ export default {
       data,
       addMemo: insert,
       openTextArea,
+      openEditTextArea,
       initializeTextArea,
-      selectedMemo
+      selectedMemo,
+      editMemo: edit
     }
   }
 }
