@@ -15,6 +15,7 @@
       <div v-else>
         <textarea name="edit_content" v-model="data.content"  @dblclick="initializeTextArea"></textarea>
         <button @click="editMemo(data)">EDIT</button>
+        <button @click="deleteMemo(data)">DELETE</button>
       </div>
     </ul>
   </div>
@@ -32,10 +33,12 @@ export default {
   },
   setup() {
     const data = reactive({
+      id: '',
       content: '',
       store: useStore(),
       closeTextArea: true,
       closeEditTextArea: true,
+      select: false
     })
     const insert = () => {
       console.log('insert')
@@ -70,9 +73,20 @@ export default {
       data.content = ''
     }
     const selectedMemo = (memo) => {
+      data.id = memo.id
       data.content = memo.content
       data.closeTextArea = false
+      data.select = true
     }
+    const deleteMemo = () => {
+      if (data.select) {
+        data.store.commit('deleteMemo', data.id)
+      } else {
+        console.log('error')
+      }
+      data.closeEditTextArea = true
+    }
+
     return {
       data,
       addMemo: insert,
@@ -80,7 +94,8 @@ export default {
       openEditTextArea,
       initializeTextArea,
       selectedMemo,
-      editMemo: edit
+      editMemo: edit,
+      deleteMemo
     }
   }
 }
