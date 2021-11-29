@@ -41,7 +41,6 @@ export default {
       select: false
     })
     const insert = () => {
-      console.log('insert')
       data.store.commit('addMemo',
           {
             id: '',
@@ -51,12 +50,13 @@ export default {
       data.content =  ''
     }
     const edit = () => {
-      console.log(data.content)
       data.store.commit('editMemo',
           {
+            id: data.id,
             content: data.content
           }
       )
+      data.id = ''
       data.content = ''
       data.closeEditTextArea = true
     }
@@ -86,7 +86,6 @@ export default {
       }
       data.closeEditTextArea = true
     }
-
     return {
       data,
       addMemo: insert,

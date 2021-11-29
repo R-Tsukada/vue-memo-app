@@ -16,15 +16,20 @@ export const store = createStore({
       })
     },
     editMemo: (state, object) => {
+      for (let i = 0; i < state.memos.length; i++) {
+        const body = state.memos[i]
+        if (body.id === object.id) {
+          state.memos.splice(i, 1)
+        } else {
+          console.log('error')
+        }
+      }
       state.memos.unshift({
-        id: state.memos.length + 1,
+        id: object.id,
         content: object.content
       })
-      const number = state.memos.length - 1
-      state.memos.splice(number - 1, 1)
     },
     deleteMemo: (state, object) => {
-      console.log(object)
       for (let i = 0; i < state.memos.length; i++) {
         const body = state.memos[i]
         if (body.id === object) {
