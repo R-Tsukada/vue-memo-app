@@ -9,7 +9,7 @@
     <!--    デバッグ用-->
     <p>{{$store.state.memos}}</p>
     <ul>
-      <li v-for="memo in memos" v-bind:key="memo.id">{{ memo.content.split('\n')[0]}}</li>
+      <li v-for="memo in memos" v-bind:key="memo.id" @click="selectedMemo(memo)">{{ memo.content.split('\n')[0]}}</li>
     </ul>
   </div>
 </template>
@@ -38,19 +38,25 @@ export default {
             content: data.content
           }
       )
-      data.content = ''
+      data.content =  ''
     }
     const openTextArea = () => {
       data.closeTextArea = false
     }
     const initializeTextArea = () => {
       data.closeTextArea = true
+      data.content = ''
+    }
+    const selectedMemo = (memo) => {
+      data.content = memo.content
+      data.closeTextArea = false
     }
     return {
       data,
       addMemo: insert,
       openTextArea,
       initializeTextArea,
+      selectedMemo
     }
   }
 }
