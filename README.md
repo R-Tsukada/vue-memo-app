@@ -1,4 +1,5 @@
 # memo-app
+Memo application created by view
 
 ## Project setup
 ```
