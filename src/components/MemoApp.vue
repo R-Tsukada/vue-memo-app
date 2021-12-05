@@ -12,8 +12,8 @@
       </div>
       <div v-else>
         <textarea class="form-control w-50 mx-auto" name="edit_content" v-model="data.content"  @dblclick="initializeTextArea"></textarea>
-        <button class="btn btn-info m-2" @click="editMemo(data)">EDIT</button>
-        <button class="btn btn-info m-2" @click="deleteMemo(data)">DELETE</button>
+        <button class="btn btn-info m-2" @click="editMemo">EDIT</button>
+        <button class="btn btn-info m-2" @click="deleteMemo">DELETE</button>
       </div>
     </ul>
   </div>
