@@ -8,30 +8,30 @@ export const store = createStore({
     }
   },
   mutations: {
-    addMemo: (state, object) => {
+    addMemo: (state, memoData) => {
       state.memos.unshift({
         id: state.memos.length + 1,
-        content: object.content
+        content: memoData.content
       })
     },
-    editMemo: (state, object) => {
+    editMemo: (state, memoData) => {
       for (let i = 0; i < state.memos.length; i++) {
-        const body = state.memos[i]
-        if (body.id === object.id) {
+        const stateMemos = state.memos[i]
+        if (stateMemos.id === memoData.id) {
           state.memos.splice(i, 1)
         } else {
           console.log('error')
         }
       }
       state.memos.unshift({
-        id: object.id,
-        content: object.content
+        id: memoData.id,
+        content: memoData.content
       })
     },
-    deleteMemo: (state, object) => {
+    deleteMemo: (state, memoId) => {
       for (let i = 0; i < state.memos.length; i++) {
         const body = state.memos[i]
-        if (body.id === object) {
+        if (body.id === memoId) {
           state.memos.splice(i, 1)
         } else {
           console.log('error')
