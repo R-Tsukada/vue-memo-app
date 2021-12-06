@@ -1,10 +1,10 @@
-import { createStore } from 'vuex'
+import {createStore} from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 
 export const store = createStore({
   state: () => {
     return {
-      memos:[]
+      memos: []
     }
   },
   mutations: {
@@ -17,11 +17,7 @@ export const store = createStore({
     editMemo: (state, memoData) => {
       for (let i = 0; i < state.memos.length; i++) {
         const stateMemos = state.memos[i]
-        if (stateMemos.id === memoData.id) {
-          state.memos.splice(i, 1)
-        } else {
-          console.log('error')
-        }
+        stateMemos.id === memoData.id ? state.memos.splice(i, 1) : undefined
       }
       state.memos.unshift({
         id: memoData.id,
@@ -30,12 +26,8 @@ export const store = createStore({
     },
     deleteMemo: (state, memoId) => {
       for (let i = 0; i < state.memos.length; i++) {
-        const body = state.memos[i]
-        if (body.id === memoId) {
-          state.memos.splice(i, 1)
-        } else {
-          console.log('error')
-        }
+        const stateMemos = state.memos[i]
+        stateMemos.id === memoId ? state.memos.splice(i, 1) : undefined
       }
     }
   },
