@@ -2,31 +2,35 @@
   <div class="memo-app">
     <h1 class="bg-secondary text-white display-4 px-3 text-center">MemoApp</h1>
     <p class="font-weight-bold" v-if="data.isCloseTextArea" @click="openTextArea">+</p>
-    <div v-else @dblclick="initializeTextArea">
+    <div v-else>
       <textarea class="form-control w-50 mx-auto" name='content' v-model="data.content"></textarea>
-      <button class="btn btn-info m-2" @click="addMemo">SAVE</button>
+      <button class="btn btn-success m-2" @click="addMemo">SAVE</button>
+      <button class="btn btn-secondary m-2" @click="initializeTextArea">CANCEL</button>
     </div>
     <ul class="list-group">
       <div v-if="data.isCloseEditTextArea" @click="openEditTextArea">
-        <li class="list-group-item list-group-item-action w-25 mx-auto" v-for="memo in memos" v-bind:key="memo.id" @click="selectedMemo(memo)">{{ memo.content.split('\n')[0] }}</li>
+        <li class="list-group-item list-group-item-action w-25 mx-auto" v-for="memo in memos" v-bind:key="memo.id"
+            @click="selectedMemo(memo)">{{ memo.content.split('\n')[0] }}
+        </li>
       </div>
       <div v-else>
-        <textarea class="form-control w-50 mx-auto" name="edit_content" v-model="data.content"  @dblclick="initializeTextArea"></textarea>
-        <button class="btn btn-info m-2" @click="editMemo">EDIT</button>
-        <button class="btn btn-info m-2" @click="deleteMemo">DELETE</button>
+        <textarea class="form-control w-50 mx-auto" name="edit_content" v-model="data.content"></textarea>
+        <button class="btn btn-success m-2" @click="editMemo">EDIT</button>
+        <button class="btn btn-danger m-2" @click="deleteMemo">DELETE</button>
+        <button class="btn btn-secondary m-2" @click="initializeTextArea">CANCEL</button>
       </div>
     </ul>
   </div>
 </template>
 
 <script>
-import { reactive } from "vue";
-import { useStore } from "vuex"
+import {reactive} from "vue";
+import {useStore} from "vuex"
 
 export default {
   computed: {
     memos: function () {
-      const memos =  this.$store.state.memos
+      const memos = this.$store.state.memos
       const memosSort = memos.sort(function (memoFirstArgument, memoSecondArgument) {
         if (memoFirstArgument.id < memoSecondArgument.id) {
           return -1
@@ -53,7 +57,7 @@ export default {
             content: data.content
           }
       )
-      data.content =  ''
+      data.content = ''
       data.isCloseTextArea = true
     }
     const editMemo = () => {
