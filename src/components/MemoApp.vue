@@ -1,14 +1,14 @@
 <template>
   <div class="memo-app">
     <h1 class="bg-secondary text-white display-4 px-3 text-center">MemoApp</h1>
-    <p class="font-weight-bold" v-if="data.isCloseTextArea" @click="openTextArea">+</p>
+    <p class="font-weight-bold" v-if="data.isTextAreaClosed" @click="openTextArea">+</p>
     <div v-else>
       <textarea class="form-control w-50 mx-auto" name='content' v-model="data.content"></textarea>
       <button class="btn btn-success m-2" @click="addMemo">SAVE</button>
       <button class="btn btn-secondary m-2" @click="initializeTextArea">CANCEL</button>
     </div>
     <ul class="list-group">
-      <div v-if="data.isCloseEditTextArea" @click="openEditTextArea">
+      <div v-if="data.isEditTextAreaClosed" @click="openEditTextArea">
         <li class="list-group-item list-group-item-action w-25 mx-auto" v-for="memo in memos" v-bind:key="memo.id"
             @click="selectedMemo(memo)">{{ memo.content.split('\n')[0] }}
         </li>
@@ -46,9 +46,9 @@ export default {
       id: '',
       content: '',
       store: useStore(),
-      isCloseTextArea: true,
-      isCloseEditTextArea: true,
-      isSelect: false
+      isTextAreaClosed: true,
+      isEditTextAreaClosed: true,
+      isSelected: false
     })
     const addMemo = () => {
       data.store.commit('addMemo',
@@ -58,7 +58,7 @@ export default {
           }
       )
       data.content = ''
-      data.isCloseTextArea = true
+      data.isTextAreaClosed = true
     }
     const editMemo = () => {
       data.store.commit('editMemo',
@@ -69,33 +69,33 @@ export default {
       )
       data.id = ''
       data.content = ''
-      data.isCloseEditTextArea = true
+      data.isEditTextAreaClosed = true
     }
     const openTextArea = () => {
-      data.isCloseTextArea = false
+      data.isTextAreaClosed = false
     }
     const openEditTextArea = () => {
-      data.isCloseEditTextArea = false
-      data.isCloseTextArea = true
+      data.isEditTextAreaClosed = false
+      data.isTextAreaClosed = true
     }
     const initializeTextArea = () => {
-      data.isCloseTextArea = true
-      data.isCloseEditTextArea = true
+      data.isTextAreaClosed = true
+      data.isEditTextAreaClosed = true
       data.content = ''
     }
     const selectedMemo = (memo) => {
       data.id = memo.id
       data.content = memo.content
-      data.isCloseTextArea = false
-      data.isSelect = true
+      data.isTextAreaClosed = false
+      data.isSelected = true
     }
     const deleteMemo = () => {
-      if (data.isSelect) {
+      if (data.isSelected) {
         data.store.commit('deleteMemo', data.id)
       } else {
         console.log('error')
       }
-      data.isCloseEditTextArea = true
+      data.isEditTextAreaClosed = true
       data.id = ''
       data.content = ''
     }
