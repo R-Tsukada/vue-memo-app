@@ -51,12 +51,7 @@ export default {
       isSelected: false
     })
     const addMemo = () => {
-      data.store.commit('addMemo',
-          {
-            id: '',
-            content: data.content
-          }
-      )
+      data.store.commit('addMemo', data.content)
       data.content = ''
       data.isTextAreaClosed = true
     }
@@ -90,11 +85,7 @@ export default {
       data.isSelected = true
     }
     const deleteMemo = () => {
-      if (data.isSelected) {
-        data.store.commit('deleteMemo', data.id)
-      } else {
-        console.log('error')
-      }
+      data.isSelected ? data.store.commit('deleteMemo', data.id) : undefined
       data.isEditTextAreaClosed = true
       data.id = ''
       data.content = ''

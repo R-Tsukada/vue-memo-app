@@ -11,7 +11,7 @@ export const store = createStore({
     addMemo: (state, memoData) => {
       state.memos.unshift({
         id: state.memos.length + 1,
-        content: memoData.content
+        content: memoData
       })
     },
     editMemo: (state, memoData) => {
