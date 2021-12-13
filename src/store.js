@@ -24,11 +24,11 @@ export const store = createStore({
         content: memoData.content
       })
     },
-    deleteMemo: (state, memoId) => {
-      for (let i = 0; i < state.memos.length; i++) {
-        const stateMemos = state.memos[i]
-        stateMemos.id === memoId ? state.memos.splice(i, 1) : undefined
-      }
+    deleteMemo: (state, memoData) => {
+      const memoSelected = state.memos.filter(function (memo) {
+        return memo.id != memoData.id
+      })
+      state.memos = memoSelected
     }
   },
   plugins: [

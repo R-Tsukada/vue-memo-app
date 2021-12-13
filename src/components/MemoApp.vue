@@ -85,7 +85,7 @@ export default {
       data.isSelected = true
     }
     const deleteMemo = () => {
-      data.isSelected ? data.store.commit('deleteMemo', data.id) : undefined
+      data.isSelected ? data.store.commit('deleteMemo', data) : undefined
       data.isEditTextAreaClosed = true
       data.id = ''
       data.content = ''
