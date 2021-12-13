@@ -15,13 +15,8 @@ export const store = createStore({
       })
     },
     editMemo: (state, memoData) => {
-      for (let i = 0; i < state.memos.length; i++) {
-        const stateMemos = state.memos[i]
-        stateMemos.id === memoData.id ? state.memos.splice(i, 1) : undefined
-      }
-      state.memos.unshift({
-        id: memoData.id,
-        content: memoData.content
+      state.memos.find((memo) => {
+        memo.id === memoData.id ? memo.content = memoData.content : undefined
       })
     },
     deleteMemo: (state, memoData) => {

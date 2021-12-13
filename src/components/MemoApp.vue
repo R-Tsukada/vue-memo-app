@@ -30,15 +30,7 @@ import {useStore} from "vuex"
 export default {
   computed: {
     memos: function () {
-      const memos = this.$store.state.memos
-      const memosSort = memos.sort(function (memoFirstArgument, memoSecondArgument) {
-        if (memoFirstArgument.id < memoSecondArgument.id) {
-          return -1
-        } else if (memoFirstArgument.id > memoSecondArgument.id) {
-          return 1
-        }
-      })
-      return memosSort
+      return this.$store.state.memos
     }
   },
   setup() {
