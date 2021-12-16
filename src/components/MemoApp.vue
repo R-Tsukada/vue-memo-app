@@ -1,7 +1,7 @@
 <template>
   <div class="memo-app">
     <h1 class="bg-secondary text-white display-4 px-3 text-center">MemoApp</h1>
-    <p class="font-weight-bold" v-if="data.isAdding" @click="openTextArea">+</p>
+    <p class="font-weight-bold" v-if="data.isAdding" @click="openAddTextArea">+</p>
     <div v-else>
       <textarea class="form-control w-50 mx-auto" name='content' v-model="data.content"></textarea>
       <button class="btn btn-success m-2" @click="addMemo">SAVE</button>
@@ -52,7 +52,7 @@ export default {
       data.content = ''
       data.isShowing = true
     }
-    const openTextArea = () => {
+    const openAddTextArea = () => {
       data.isAdding = false
     }
     const openEditTextArea = () => {
@@ -78,7 +78,7 @@ export default {
     return {
       data,
       addMemo,
-      openTextArea,
+      openAddTextArea,
       openEditTextArea,
       initializeTextArea,
       selectedMemo,
