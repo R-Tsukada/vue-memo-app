@@ -47,12 +47,7 @@ export default {
       data.isAdding = true
     }
     const editMemo = () => {
-      data.store.commit('editMemo',
-          {
-            id: data.id,
-            content: data.content
-          }
-      )
+      data.store.commit('editMemo', { id: data.id, content: data.content })
       data.id = ''
       data.content = ''
       data.isShowing = true

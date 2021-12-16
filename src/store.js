@@ -15,14 +15,11 @@ export const store = createStore({
       })
     },
     editMemo: (state, memoData) => {
-      state.memos.find((memo) => {
-        memo.id === memoData.id ? memo.content = memoData.content : undefined
-      })
+      const memo = state.memos.find((memo) => memo.id === memoData.id )
+      memo.content = memoData.content
     },
     deleteMemo: (state, memoData) => {
-      const memoSelected = state.memos.filter(function (memo) {
-        return memo.id != memoData.id
-      })
+      const memoSelected = state.memos.filter((memo) => memo.id != memoData.id)
       state.memos = memoSelected
     }
   },
