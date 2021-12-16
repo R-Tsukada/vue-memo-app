@@ -9,13 +9,10 @@ export const store = createStore({
   },
   mutations: {
     addMemo: (state, memoData) => {
-      state.memos.unshift({
-        id: state.memos.length + 1,
-        content: memoData
-      })
+      state.memos.unshift({id: state.memos.length + 1, content: memoData})
     },
     editMemo: (state, memoData) => {
-      const memo = state.memos.find((memo) => memo.id === memoData.id )
+      const memo = state.memos.find((memo) => memo.id === memoData.id)
       memo.content = memoData.content
     },
     deleteMemo: (state, memoData) => {
