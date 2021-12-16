@@ -40,7 +40,6 @@ export default {
       store: useStore(),
       isAdding: true,
       isShowing: true,
-      isSelected: false
     })
     const addMemo = () => {
       data.store.commit('addMemo', data.content)
@@ -76,8 +75,8 @@ export default {
       data.isAdding = false
     }
     const deleteMemo = () => {
-      data.isSelected ? data.store.commit('deleteMemo', data) : undefined
-      data.isEditTextAreaClosed = true
+      data.isShowing = true
+      data.isShowing ? data.store.commit('deleteMemo', data) : undefined
       data.id = ''
       data.content = ''
     }
