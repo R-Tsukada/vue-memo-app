@@ -15,7 +15,7 @@
       </div>
       <div v-else>
         <textarea class="form-control w-50 mx-auto" name="edit_content" v-model="data.content"></textarea>
-        <button class="btn btn-success m-2" @click="editMemo">EDIT</button>
+        <button class="btn btn-success m-2" @click="editMemo">SAVE</button>
         <button class="btn btn-danger m-2" @click="deleteMemo">DELETE</button>
         <button class="btn btn-secondary m-2" @click="initializeTextArea">CANCEL</button>
       </div>
