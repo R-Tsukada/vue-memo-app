@@ -71,7 +71,7 @@ export default {
     }
     const deleteMemo = () => {
       data.isShowing = true
-      data.isShowing ? data.store.commit('deleteMemo', data) : undefined
+      data.store.commit('deleteMemo', data)
       data.id = ''
       data.content = ''
     }
