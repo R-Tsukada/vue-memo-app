@@ -9,7 +9,7 @@
     <p class="font-weight-bold" v-else @click="openAddTextArea">+</p>
     <ul class="list-group">
       <div v-if="data.isEditing">
-        <textarea class="form-control w-50 mx-auto" name="edit_content" v-model="data.content"></textarea>
+        <textarea class="form-control w-50 mx-auto" name="edit_content" v-model="data.selectedMemoContent"></textarea>
         <button class="btn btn-success m-2" @click="editMemo">SAVE</button>
         <button class="btn btn-danger m-2" @click="deleteMemo">DELETE</button>
         <button class="btn btn-secondary m-2" @click="initializeTextArea">CANCEL</button>
@@ -35,8 +35,8 @@ export default {
   },
   setup() {
     const data = reactive({
-      id: '',
-      content: '',
+      selectedMemoId: '',
+      selectedMemoContent: '',
       addNewMemo: '',
       store: useStore(),
       isAdding: false,
@@ -49,8 +49,8 @@ export default {
     }
     const editMemo = () => {
       data.store.commit('editMemo', data)
-      data.id = ''
-      data.content = ''
+      data.selectedMemoId = ''
+      data.selectedMemoContent = ''
       data.isEditing = false
     }
     const openAddTextArea = () => {
@@ -62,18 +62,18 @@ export default {
     const initializeTextArea = () => {
       data.isAdding = false
       data.isEditing = false
-      data.content = ''
+      data.selectedMemoContent = ''
     }
     const selectedMemo = (memo) => {
-      data.id = memo.id
-      data.content = memo.content
+      data.selectedMemoId = memo.id
+      data.selectedMemoContent = memo.content
       data.isAdding = false
     }
     const deleteMemo = () => {
       data.store.commit('deleteMemo', data)
       data.isEditing = false
-      data.id = ''
-      data.content = ''
+      data.selectedMemoId = ''
+      data.selectedMemoContent = ''
     }
     return {
       data,
