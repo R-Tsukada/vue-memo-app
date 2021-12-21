@@ -44,7 +44,7 @@ export default {
     })
     const addMemo = () => {
       data.store.commit('addMemo', data.addingNewMemoContent)
-      data.addingNewMemoContent = ''
+      initializeAddTextArea()
       closeAddTextArea()
     }
     const editMemo = () => {
@@ -74,6 +74,9 @@ export default {
     const closeEditTextArea = () => {
       data.isEditing = false
     }
+    const initializeAddTextArea = () => {
+      data.addingNewMemoContent = ''
+    }
     const initializeEditTextArea = () => {
       data.selectedMemoId = ''
       data.selectedMemoContent = ''
@@ -88,6 +91,7 @@ export default {
       openEditTextArea,
       closeAddTextArea,
       closeEditTextArea,
+      initializeAddTextArea,
       initializeEditTextArea
     }
   }
