@@ -4,7 +4,7 @@
     <div v-if="data.isAdding">
       <textarea class="form-control w-50 mx-auto" name='content' v-model="data.addNewMemo"></textarea>
       <button class="btn btn-success m-2" @click="addMemo">SAVE</button>
-      <button class="btn btn-secondary m-2" @click="initializeTextArea">CANCEL</button>
+      <button class="btn btn-secondary m-2" @click="closeAddTextArea">CANCEL</button>
     </div>
     <p class="font-weight-bold" v-else @click="openAddTextArea">+</p>
     <ul class="list-group">
@@ -12,9 +12,9 @@
         <textarea class="form-control w-50 mx-auto" name="edit_content" v-model="data.selectedMemoContent"></textarea>
         <button class="btn btn-success m-2" @click="editMemo">SAVE</button>
         <button class="btn btn-danger m-2" @click="deleteMemo">DELETE</button>
-        <button class="btn btn-secondary m-2" @click="initializeTextArea">CANCEL</button>
+        <button class="btn btn-secondary m-2" @click="closeEditTextArea">CANCEL</button>
       </div>
-      <div v-else @click="openEditTextArea">
+      <div v-else>
         <li class="list-group-item list-group-item-action w-25 mx-auto" v-for="memo in memos" v-bind:key="memo.id"
             @click="selectedMemo(memo)">{{ memo.content.split('\n')[0] }}
         </li>
@@ -45,13 +45,22 @@ export default {
     const addMemo = () => {
       data.store.commit('addMemo', data.addNewMemo)
       data.addNewMemo = ''
-      data.isAdding = false
+      closeAddTextArea()
     }
     const editMemo = () => {
       data.store.commit('editMemo', data)
-      data.selectedMemoId = ''
-      data.selectedMemoContent = ''
+      initializeEditTextArea()
+      closeEditTextArea()
+    }
+    const deleteMemo = () => {
+      data.store.commit('deleteMemo', data.selectedMemoId)
       data.isEditing = false
+      initializeEditTextArea()
+    }
+    const selectedMemo = (memo) => {
+      data.selectedMemoId = memo.id
+      data.selectedMemoContent = memo.content
+      openEditTextArea()
     }
     const openAddTextArea = () => {
       data.isAdding = true
@@ -59,31 +68,27 @@ export default {
     const openEditTextArea = () => {
       data.isEditing = true
     }
-    const initializeTextArea = () => {
-      data.isAdding = false
-      data.isEditing = false
-      data.selectedMemoContent = ''
-    }
-    const selectedMemo = (memo) => {
-      data.selectedMemoId = memo.id
-      data.selectedMemoContent = memo.content
+    const closeAddTextArea = () => {
       data.isAdding = false
     }
-    const deleteMemo = () => {
-      data.store.commit('deleteMemo', data.selectedMemoId)
+    const closeEditTextArea = () => {
       data.isEditing = false
+    }
+    const initializeEditTextArea = () => {
       data.selectedMemoId = ''
       data.selectedMemoContent = ''
     }
     return {
       data,
       addMemo,
+      editMemo,
+      deleteMemo,
+      selectedMemo,
       openAddTextArea,
       openEditTextArea,
-      initializeTextArea,
-      selectedMemo,
-      editMemo,
-      deleteMemo
+      closeAddTextArea,
+      closeEditTextArea,
+      initializeEditTextArea
     }
   }
 }
