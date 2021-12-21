@@ -15,9 +15,8 @@ export const store = createStore({
       const memo = state.memos.find(memo => memo.id === selectedMemoId)
       memo.content = selectedMemoContent
     },
-    deleteMemo: (state, memoData) => {
-      const memoSelected = state.memos.filter(memo => memo.id != memoData.selectedMemoId)
-      state.memos = memoSelected
+    deleteMemo: (state, id) => {
+      state.memos = state.memos.filter(memo => memo.id != id)
     }
   },
   plugins: [

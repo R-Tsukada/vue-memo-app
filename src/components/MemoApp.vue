@@ -70,7 +70,7 @@ export default {
       data.isAdding = false
     }
     const deleteMemo = () => {
-      data.store.commit('deleteMemo', data)
+      data.store.commit('deleteMemo', data.selectedMemoId)
       data.isEditing = false
       data.selectedMemoId = ''
       data.selectedMemoContent = ''
