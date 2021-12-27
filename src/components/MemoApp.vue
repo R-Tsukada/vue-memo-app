@@ -49,13 +49,12 @@ export default {
     }
     const editMemo = () => {
       data.store.commit('editMemo', data)
-      initializeEditTextArea()
       closeEditTextArea()
     }
     const deleteMemo = () => {
       data.store.commit('deleteMemo', data.selectedMemoId)
       data.isEditing = false
-      initializeEditTextArea()
+      closeEditTextArea()
     }
     const selectedMemo = (memo) => {
       data.selectedMemoId = memo.id
@@ -77,10 +76,6 @@ export default {
     const initializeAddTextArea = () => {
       data.newMemoContent = ''
     }
-    const initializeEditTextArea = () => {
-      data.selectedMemoId = undefined
-      data.selectedMemoContent = ''
-    }
     return {
       data,
       addMemo,
@@ -92,7 +87,6 @@ export default {
       closeAddTextArea,
       closeEditTextArea,
       initializeAddTextArea,
-      initializeEditTextArea
     }
   }
 }
