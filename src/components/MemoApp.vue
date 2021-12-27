@@ -48,7 +48,7 @@ export default {
       closeAddTextArea()
     }
     const editMemo = () => {
-      data.store.commit('editMemo', data)
+      data.store.commit('editMemo', {id: data.selectedMemoId, content: data.selectedMemoContent})
       closeEditTextArea()
     }
     const deleteMemo = () => {

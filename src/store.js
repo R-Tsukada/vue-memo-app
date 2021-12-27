@@ -11,9 +11,9 @@ export const store = createStore({
     addMemo: (state, content) => {
       state.memos.unshift({id: state.memos.length + 1, content: content})
     },
-    editMemo: (state, {selectedMemoId, selectedMemoContent}) => {
-      const memo = state.memos.find(memo => memo.id === selectedMemoId)
-      memo.content = selectedMemoContent
+    editMemo: (state, {id, content}) => {
+      const memo = state.memos.find(memo => memo.id === id)
+      memo.content = content
     },
     deleteMemo: (state, id) => {
       state.memos = state.memos.filter(memo => memo.id !== id)
