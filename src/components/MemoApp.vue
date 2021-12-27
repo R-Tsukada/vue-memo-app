@@ -2,7 +2,7 @@
   <div class="memo-app">
     <h1 class="bg-secondary text-white display-4 px-3 text-center">MemoApp</h1>
     <div v-if="data.isAdding">
-      <textarea class="form-control w-50 mx-auto" name='content' v-model="data.addingNewMemoContent"></textarea>
+      <textarea class="form-control w-50 mx-auto" name='content' v-model="data.newMemoContent"></textarea>
       <button class="btn btn-success m-2" @click="addMemo">SAVE</button>
       <button class="btn btn-secondary m-2" @click="closeAddTextArea">CANCEL</button>
     </div>
@@ -35,15 +35,15 @@ export default {
   },
   setup() {
     const data = reactive({
-      selectedMemoId: '',
+      selectedMemoId: undefined,
       selectedMemoContent: '',
-      addingNewMemoContent: '',
+      newMemoContent: '',
       store: useStore(),
       isAdding: false,
       isEditing: false,
     })
     const addMemo = () => {
-      data.store.commit('addMemo', data.addingNewMemoContent)
+      data.store.commit('addMemo', data.newMemoContent)
       initializeAddTextArea()
       closeAddTextArea()
     }
@@ -75,10 +75,10 @@ export default {
       data.isEditing = false
     }
     const initializeAddTextArea = () => {
-      data.addingNewMemoContent = ''
+      data.newMemoContent = ''
     }
     const initializeEditTextArea = () => {
-      data.selectedMemoId = ''
+      data.selectedMemoId = undefined
       data.selectedMemoContent = ''
     }
     return {
