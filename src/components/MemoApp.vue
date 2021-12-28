@@ -15,8 +15,8 @@
         <button class="btn btn-secondary m-2" @click="closeEditTextArea">CANCEL</button>
       </div>
       <div v-else>
-        <li class="list-group-item list-group-item-action w-25 mx-auto" v-for="memo in memos" v-bind:key="memo.id"
-            @click="selectedMemo(memo)">{{ memo.content.split('\n')[0] }}
+        <li class="list-group-item list-group-item-action w-25 mx-auto" v-for="memo in memos" :key="memo.id"
+            @click="selectMemo(memo)">{{ memo.content.split('\n')[0] }}
         </li>
       </div>
     </ul>
@@ -44,7 +44,7 @@ export default {
     })
     const addMemo = () => {
       data.store.commit('addMemo', data.newMemoContent)
-      initializeAddTextArea()
+      data.newMemoContent = ''
       closeAddTextArea()
     }
     const editMemo = () => {
@@ -56,7 +56,7 @@ export default {
       data.isEditing = false
       closeEditTextArea()
     }
-    const selectedMemo = (memo) => {
+    const selectMemo = (memo) => {
       data.selectedMemoId = memo.id
       data.selectedMemoContent = memo.content
       openEditTextArea()
@@ -73,20 +73,16 @@ export default {
     const closeEditTextArea = () => {
       data.isEditing = false
     }
-    const initializeAddTextArea = () => {
-      data.newMemoContent = ''
-    }
     return {
       data,
       addMemo,
       editMemo,
       deleteMemo,
-      selectedMemo,
+      selectMemo,
       openAddTextArea,
       openEditTextArea,
       closeAddTextArea,
       closeEditTextArea,
-      initializeAddTextArea,
     }
   }
 }
